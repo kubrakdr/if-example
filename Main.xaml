@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="682,783" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="908,1093" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -26,6 +26,8 @@
       <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -65,7 +67,7 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="755,678" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap:VirtualizedContainerService.HintSize="918,888" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_inputValue" />
       <Variable x:TypeArguments="x:Int32" Name="int_inputValue" />
@@ -75,14 +77,14 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="713,238" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Bir değer giriniz" Title="Mesaj">
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="876,238" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Bir değer giriniz" Title="Mesaj">
       <ui:InputDialog.Result>
         <OutArgument x:TypeArguments="x:String">
           <mca:CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">str_inputValue</mca:CSharpReference>
         </OutArgument>
       </ui:InputDialog.Result>
     </ui:InputDialog>
-    <Assign sap:VirtualizedContainerService.HintSize="713,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="876,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Int32">
           <mca:CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">int_inputValue</mca:CSharpReference>
@@ -94,26 +96,75 @@
         </InArgument>
       </Assign.Value>
     </Assign>
-    <If sap:VirtualizedContainerService.HintSize="713,208" sap2010:WorkflowViewState.IdRef="If_1">
+    <If sap:VirtualizedContainerService.HintSize="876,418" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
-          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">int_inputValue &gt;8</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_16" xml:space="preserve">int_inputValue &gt; 0  &amp;&amp; int_inputValue &lt;8</mca:CSharpValue>
         </InArgument>
       </If.Condition>
       <If.Then>
-        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_1">
-          <ui:MessageBox.Text>
-            <InArgument x:TypeArguments="x:Object">
-              <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">"Girilen değer 8 den büyüktür"</mca:CSharpValue>
+        <Switch x:TypeArguments="x:Int32" DisplayName="Switch" sap:VirtualizedContainerService.HintSize="497,270" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+          <Switch.Expression>
+            <InArgument x:TypeArguments="x:Int32">
+              <mca:CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">int_inputValue</mca:CSharpValue>
             </InArgument>
-          </ui:MessageBox.Text>
-        </ui:MessageBox>
+          </Switch.Expression>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" x:Key="1" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_3">
+            <ui:MessageBox.Text>
+              <InArgument x:TypeArguments="x:Object">
+                <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">"Bugün pazartesi."</mca:CSharpValue>
+              </InArgument>
+            </ui:MessageBox.Text>
+          </ui:MessageBox>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" x:Key="2" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_4">
+            <ui:MessageBox.Text>
+              <InArgument x:TypeArguments="x:Object">
+                <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">"Bugün Salı."</mca:CSharpValue>
+              </InArgument>
+            </ui:MessageBox.Text>
+          </ui:MessageBox>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" x:Key="3" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_5">
+            <ui:MessageBox.Text>
+              <InArgument x:TypeArguments="x:Object">
+                <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">"Bugün Çarşamba"</mca:CSharpValue>
+              </InArgument>
+            </ui:MessageBox.Text>
+          </ui:MessageBox>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" x:Key="4" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_6">
+            <ui:MessageBox.Text>
+              <InArgument x:TypeArguments="x:Object">
+                <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">"Bugün Perşembe."</mca:CSharpValue>
+              </InArgument>
+            </ui:MessageBox.Text>
+          </ui:MessageBox>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" x:Key="5" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_7">
+            <ui:MessageBox.Text>
+              <InArgument x:TypeArguments="x:Object">
+                <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">"Bugün Cuma."</mca:CSharpValue>
+              </InArgument>
+            </ui:MessageBox.Text>
+          </ui:MessageBox>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" x:Key="6" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_8">
+            <ui:MessageBox.Text>
+              <InArgument x:TypeArguments="x:Object">
+                <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">"Bugün Cumartesi."</mca:CSharpValue>
+              </InArgument>
+            </ui:MessageBox.Text>
+          </ui:MessageBox>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" x:Key="7" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_9">
+            <ui:MessageBox.Text>
+              <InArgument x:TypeArguments="x:Object">
+                <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_13">"Bugün Pazar."</mca:CSharpValue>
+              </InArgument>
+            </ui:MessageBox.Text>
+          </ui:MessageBox>
+        </Switch>
       </If.Then>
       <If.Else>
         <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_2">
           <ui:MessageBox.Text>
             <InArgument x:TypeArguments="x:Object">
-              <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">"Girilen değer 8 den küçüktür."</mca:CSharpValue>
+              <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_14">"Girilen değer 1-7 aralığında olmalıdır."</mca:CSharpValue>
             </InArgument>
           </ui:MessageBox.Text>
         </ui:MessageBox>
